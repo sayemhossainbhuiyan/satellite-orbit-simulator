@@ -1,0 +1,32 @@
+[gd_resource type="Environment" format=3 uid="uid://bt64xxgnxdv01"]
+
+[ext_resource type="Shader" uid="uid://1q8us1p6cwnx" path="res://shaders/starfield_sky.gdshader" id="1"]
+
+[sub_resource type="ShaderMaterial" id="SkyMat"]
+shader = ExtResource("1")
+shader_parameter/nebula_color_a = Color(0.22, 0.1, 0.32, 1)
+shader_parameter/nebula_color_b = Color(0.06, 0.16, 0.3, 1)
+shader_parameter/star_density = 0.987
+
+[sub_resource type="Sky" id="Sky"]
+sky_material = SubResource("SkyMat")
+radiance_size = 1
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky")
+ambient_light_energy = 0.5
+tonemap_mode = 3
+tonemap_exposure = 1.15
+tonemap_white = 6.0
+glow_enabled = true
+glow_levels/3 = 0.6
+glow_levels/5 = 0.8
+glow_levels/7 = 0.6
+glow_intensity = 0.85
+glow_strength = 1.1
+glow_bloom = 0.22
+glow_hdr_threshold = 1.05
+adjustment_enabled = true
+adjustment_contrast = 1.06
+adjustment_saturation = 1.08
