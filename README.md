@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Satellite Orbit Simulator — Godot 4 Edition
 
 A real-time, physically-grounded satellite orbit visualizer built in
@@ -172,3 +173,6 @@ independently testable.
   architecture (SimState driving stateless visual scenes) supports it
   by instancing additional Satellite/OrbitRenderer pairs against
   per-satellite state.
+=======
+# satellite-orbit-simulator
+>>>>>>> 7ce04968b779db39267df6c1cda781a286b18d52
