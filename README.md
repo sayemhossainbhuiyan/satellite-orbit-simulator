@@ -2,7 +2,7 @@
 # Satellite Orbit Simulator — Godot 4 Edition
 
 A real-time, physically-grounded satellite orbit visualizer built in
-**Godot 4 / GDScript**, styled after mission-analysis software (the kind
+Godot 4 / GDScript, styled after mission-analysis software (the kind
 of tool an ops room or an aerospace engineering course would use), rather
 than a game. This is a ground-up rebuild of an earlier Pygame prototype —
 no Pygame code was ported. Rendering, UI, camera, and physics were all
@@ -11,23 +11,23 @@ shaders, `WorldEnvironment` HDR pipeline, `Control` UI).
 
 ---
 
-## 1. Installation
+ 1. Installation
 
-**Requirements:** Godot 4.3 or later (Forward+ renderer). No plugins, no
+Requirements: Godot 4.3 or later (Forward+ renderer). No plugins, no
 external assets, no internet connection needed — everything, including
 Earth's surface, the starfield, and the atmosphere, is generated
 procedurally by shaders and code at runtime.
 
 1. Open Godot 4.
-2. **Import** → select this project's `project.godot`.
-3. Press **F5** (or the ▶ Play button). `Main.tscn` is the entry scene.
+2. Import → select this project's `project.godot`.
+3. Press F5 (or the ▶ Play button). `Main.tscn` is the entry scene.
 
 No build step, no missing-texture errors, no setup beyond opening the
 project.
 
 ---
 
-## 2. Controls
+ 2. Controls
 
 | Input | Action |
 |---|---|
@@ -49,57 +49,57 @@ project).
 
 ---
 
-## 3. Features
+ 3. Features
 
-- **Procedural Earth** — no texture files. A single spatial shader
+- Procedural Earth — no texture files. A single spatial shader
   (`shaders/earth.gdshader`) layers value-noise continents, oceans,
   polar ice, animated clouds, a day/night terminator, and emissive city
   lights on the dark side.
-- **Atmosphere glow** — a front-face-culled, slightly oversized sphere
+- Atmosphere glow — a front-face-culled, slightly oversized sphere
   with a Fresnel-driven additive shader (`shaders/atmosphere.gdshader`)
   produces the limb-glow "atmospheric scattering" look.
-- **Procedural starfield + nebula sky** — `shaders/starfield_sky.gdshader`
+- Procedural starfield + nebula sky — `shaders/starfield_sky.gdshader`
   drives the `WorldEnvironment`'s sky, generating stars and soft nebula
   bands from hashed noise (no skybox image).
-- **HDR lighting / bloom** — configured in `scenes/default_env.tres`:
+- HDR lighting / bloom — configured in `scenes/default_env.tres`:
   ACES tonemapping, glow/bloom, and a subtle contrast/saturation grade.
-- **Original satellite model** — assembled from primitives in
+- Original satellite model — assembled from primitives in
   `scripts/satellite.gd`: a hex-profile metallic bus, MLI thermal wrap,
   two solar-panel wings with emissive cell-grid striping, a parabolic
   dish + whip antennas, and four attitude-control thruster nozzles plus
   a main engine bell. Not a copy of any real spacecraft.
-- **Orbit trail + predicted path** — the satellite leaves a fading
-  cyan trail of where it's *been*; `OrbitRenderer` separately draws the
+- Orbit trail + predicted path — the satellite leaves a fading
+  cyan trail of where it's been; `OrbitRenderer` separately draws the
   full analytic ellipse of where it's *going*.
-- **Newtonian orbital mechanics** — see §4.
-- **Seven mission presets** — LEO (ISS-class), MEO (GPS-class), GEO,
+- Newtonian orbital mechanics — see §4.
+- Seven mission presets — LEO (ISS-class), MEO (GPS-class), GEO,
   Polar, Sun-Synchronous, Molniya (highly elliptical), and an Escape
   Trajectory, each with physically representative altitude,
   inclination, and eccentricity.
-- **Professional dark UI** — glass-panel styling, mission-control color
+- Professional dark UI — glass-panel styling, mission-control color
   language (electric cyan / mission green / warning amber / critical
   red), live telemetry, and an escape-trajectory warning banner.
-- **Screenshot & CSV telemetry export**, driven straight from the UI.
+- Screenshot & CSV telemetry export, driven straight from the UI.
 
 ---
 
-## 4. Physics
+ 4. Physics
 
 Two propagation modes are used, matching how real mission tools
 distinguish stable orbits from escape trajectories:
 
-**Closed orbits (e < 1):** propagated analytically via classical
-orbital elements. Each simulated step advances the *mean anomaly*
+Closed orbits (e < 1):** propagated analytically via classical
+orbital elements. Each simulated step advances the mean anomaly
 linearly (`M = M₀ + n·t`, where `n` is the mean motion,
 `n = √(μ / a³)`), then recovers the *eccentric anomaly* by solving
 Kepler's equation `M = E − e·sin(E)` with Newton–Raphson iteration, and
-finally the *true anomaly* from `E`. The true anomaly plus the six
+finally the true anomaly from `E`. The true anomaly plus the six
 classical elements (`a, e, i, Ω, ω, ν`) are converted to a Cartesian
 state vector via the standard perifocal-to-inertial rotation. This is
 exact for the unperturbed two-body problem — no drift, no integration
 error, at any simulation speed.
 
-**Escape trajectories (e ≥ 1):** once a mission crosses escape
+Escape trajectories (e ≥ 1): once a mission crosses escape
 velocity, the analytic ellipse no longer applies, so the simulator
 switches to direct numerical integration — 4th-order Runge–Kutta
 (RK4) on Newton's law of gravitation, `a = −μ·r / |r|³` — which
@@ -117,7 +117,7 @@ so displayed numbers are never separately approximated for the UI.
 
 ---
 
-## 5. Folder structure
+ 5. Folder structure
 
 ```
 project.godot
@@ -145,7 +145,7 @@ assets/
     icons/icon.svg
 ```
 
-**Architecture notes:** each `.tscn` is a thin root node carrying a
+Architecture notes: each `.tscn` is a thin root node carrying a
 single script that builds and owns its own children in code
 (`_ready()`), rather than hand-authored node trees — this keeps every
 visual component self-contained, reusable, and diff-friendly, and
@@ -158,7 +158,7 @@ independently testable.
 
 ---
 
-## 6. Known limitations / next steps
+ 6. Known limitations / next steps
 
 - Only two-body Newtonian gravity is modeled; J2 oblateness and drag
   constants are defined (`Constants.EARTH_J2`,
@@ -174,5 +174,5 @@ independently testable.
   by instancing additional Satellite/OrbitRenderer pairs against
   per-satellite state.
 =======
-# satellite-orbit-simulator
+ satellite-orbit-simulator
 >>>>>>> 7ce04968b779db39267df6c1cda781a286b18d52
